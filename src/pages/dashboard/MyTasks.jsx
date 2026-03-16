@@ -86,7 +86,7 @@ function MyTasks() {
     try {
 
       await axios.delete(
-        `http://localhost:5000/api/tasks/${taskId}`,
+        `https://server-le4u.onrender.com/api/tasks/${taskId}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -137,7 +137,7 @@ function MyTasks() {
     try {
 
       await axios.post(
-        "http://localhost:5000/api/reviews",
+        "https://server-le4u.onrender.com/api/reviews",
         {
           taskId: selectedTask._id,
           helperId: selectedTask.helper._id || selectedTask.helper,

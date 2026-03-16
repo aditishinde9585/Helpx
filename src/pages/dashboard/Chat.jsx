@@ -6,7 +6,9 @@ import Navbar from "../../components/Navbar";
 
 import { FaPaperPlane, FaRupeeSign } from "react-icons/fa";
 
-const socket = io(https://server-le4u.onrender.com/");
+const socket = io("https://server-le4u.onrender.com/", {
+  transports: ["websocket"]
+});
 
 function Chat() {
 
@@ -26,7 +28,7 @@ function Chat() {
     const fetchMessages = async () => {
 
       const res = await axios.get(
-        `http://localhost:5000/api/messages/${taskId}`,
+        `https://server-le4u.onrender.com/api/messages/${taskId}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -50,30 +52,25 @@ function Chat() {
 
   }, [taskId]);
 
-
   useEffect(() => {
 
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 
   }, [messages]);
 
-
   const sendMessage = () => {
 
     if (!text.trim()) return;
 
     socket.emit("send_message", {
-
       room: taskId,
       senderId: currentUser.id,
       text
-
     });
 
     setText("");
 
   };
-
 
   return (
 
@@ -124,7 +121,6 @@ function Chat() {
 
         </div>
 
-
         {/* MESSAGES */}
 
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -168,7 +164,6 @@ function Chat() {
 
         </div>
 
-
         {/* INPUT */}
 
         <div className="p-4 border-t bg-white">
@@ -178,7 +173,7 @@ function Chat() {
             <input
               value={text}
               onChange={(e)=>setText(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               className="flex-1 border rounded-xl px-4 py-3 outline-none focus:border-blue-500"
               placeholder="Type your message..."
             />
