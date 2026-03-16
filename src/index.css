@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+
+  /* Adds a realistic pressed-in look for inputs */
+  .shadow-inner-3d {
+    box-shadow: inset 6px 6px 12px #c8c9cc,
+      inset -6px -6px 12px #ffffff;
+  }
+
+  /* Adds a floating "pop-out" look for the card */
+  .shadow-flat-3d {
+    box-shadow: 20px 20px 60px #bebebe,
+      -20px -20px 60px #ffffff;
+  }
+
+  /* Smoothly scales the button down when clicked */
+  .active-press {
+    @apply active:scale-95 active:shadow-inner transition-transform duration-75;
+  }
+}
+
+/* Optional: Subtle background mesh for extra depth */
+body {
+  background-color: #e0e5ec;
+  background-image: radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.5) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(0, 0, 0, 0.05) 0, transparent 50%);
+  min-height: 100vh;
+}
